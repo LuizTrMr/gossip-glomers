@@ -1,6 +1,0 @@
-0	:invoke	:echo	"Please echo 87"
-0	:ok	:echo	{:type "echo_ok", :echo "Please echo 87", :msg_id 0, :in_reply_to 1}
-0	:invoke	:echo	"Please echo 91"
-0	:info	:echo	"Please echo 91"	:net-timeout
-1	:invoke	:echo	"Please echo 36"
-1	:info	:echo	"Please echo 36"	:net-timeout

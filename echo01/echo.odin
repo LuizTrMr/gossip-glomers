@@ -1,7 +1,6 @@
 package echo01
 
 import "core:os"
-import "core:fmt"
 import "core:encoding/json"
 import "../general"
 
@@ -9,7 +8,7 @@ run_test :: proc() {
 	general.run(process_request)
 }
 
-process_request :: proc(json_string: string, logger: os.Handle) -> (string, bool) { using general
+process_request :: proc(json_string: string) -> (string, bool) { using general
 	check_msg: Message(Generic_Request)
 	json.unmarshal_string(json_string, &check_msg)
 	
@@ -17,7 +16,6 @@ process_request :: proc(json_string: string, logger: os.Handle) -> (string, bool
 		case "init": {
 			msg: Message(Init_Request)
 			json.unmarshal_string(json_string, &msg)
-			// write(logger, something)
 
 			resp := Message(Init_Response){
 				src  = msg.dest,
@@ -28,13 +26,11 @@ process_request :: proc(json_string: string, logger: os.Handle) -> (string, bool
 				},
 			}
 			data, marshal_err := json.marshal(resp)
-			// write(logger, something)
 			return string(data), true
 		}
 		case "echo": {
 			msg: Message(Echo_Request)
 			json.unmarshal_string(json_string, &msg)
-			// write(logger, something)
 
 			resp := Message(Echo_Response){
 				src  = msg.dest,
@@ -48,7 +44,6 @@ process_request :: proc(json_string: string, logger: os.Handle) -> (string, bool
 			}
 			global_msg_id += 1
 			data, marshal_err := json.marshal(resp)
-			// write(logger, something)
 			return string(data), true
 		}
 		case: {}

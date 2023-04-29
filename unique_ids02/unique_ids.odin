@@ -10,7 +10,7 @@ run_test :: proc() {
 	general.run(process_request)
 }
 
-process_request :: proc(json_string: string, logger: os.Handle) -> (string, bool) { using general
+process_request :: proc(json_string: string) -> (string, bool) { using general
 	check_msg: Message(Generic_Request)
 	json.unmarshal_string(json_string, &check_msg)
 	

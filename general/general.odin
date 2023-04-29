@@ -7,17 +7,13 @@ import "core:encoding/json"
 LINE_SIZE :: 1024
 global_msg_id: int = 0
 
-run :: proc(process_request: proc(json_string: string, logger: os.Handle) -> (string, bool)) {
-	logger, err := os.open("log.txt", os.O_CREATE | os.O_WRONLY,  0o644)
-	if err != 0 {
-		panic("Deu bosta")
-	}
-	write(logger, "LOG START\n")
+run :: proc(process_request: proc(json_string: string) -> (string, bool)) {
+	write("LOG START\n")
 	for true {
 		buf: [LINE_SIZE]byte
 		json_string, ok := read_line(buf[:])
 		if !ok do continue
-		response, found := process_request(json_string, logger)
+		response, found := process_request(json_string)
 		if !found do continue
 		fmt.println(response) // Write to stdout
 	}
@@ -45,9 +41,8 @@ Message :: struct($Body: typeid) {
 	body: Body,   // An object: the payload of the message
 }
 
-write :: proc(h: os.Handle, s: string) {
-	// TODO: Sla que eu tinha feito aqui antes de fazer merda com o git
-	os.write(h, transmute([]byte)s)
+write :: proc(s: string) {
+	os.write(os.stderr, transmute([]byte)s)
 }
 
 read_line :: proc(buf: []byte) -> (string, bool) {

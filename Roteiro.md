@@ -12,8 +12,12 @@
 > Bem simples, clientes mandam uma mensagem a um nó e é necessário responder com a mesma mensagem.
 
 ## Desafio 2 - [Unique ID Generation](https://fly.io/dist-sys/2/)
+TODO: Tentar ULID? ; Usar só o nome do nó mais o id da mensagem como ID.
 > Criar um ID único e universal ao cluster e responder a mensagem com esse ID.
 
 ## Desafio 3 - [Broadcast](https://fly.io/dist-sys/3a/)
-- a)
-- b)
+- a) Single Node
+> 
+
+- b) Multi Node
+> 

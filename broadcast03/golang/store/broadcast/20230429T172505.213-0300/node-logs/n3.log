@@ -1,0 +1,5 @@
+2023/04/29 17:25:06 Received {c3 n3 {"type":"init","node_id":"n3","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2023/04/29 17:25:06 Node n3 initialized
+2023/04/29 17:25:06 Sent {"src":"n3","dest":"c3","body":{"in_reply_to":1,"type":"init_ok"}}
+2023/04/29 17:25:06 Received {c8 n3 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2023/04/29 17:25:06 Sent {"src":"n3","dest":"c8","body":{"in_reply_to":1,"msg_id":0,"type":"topology_ok"}}

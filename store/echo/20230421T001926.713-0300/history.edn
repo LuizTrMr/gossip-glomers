@@ -1,6 +1,0 @@
-{:index 0, :time 12933083, :type :invoke, :process 0, :f :echo, :value "Please echo 87"}
-{:index 1, :time 20007000, :type :ok, :process 0, :f :echo, :value {:type "echo_ok", :echo "Please echo 87", :msg_id 0, :in_reply_to 1}}
-{:index 2, :time 165280167, :type :invoke, :process 0, :f :echo, :value "Please echo 91"}
-{:index 3, :time 5170855042, :type :info, :process 0, :f :echo, :value "Please echo 91", :error :net-timeout}
-{:index 4, :time 5170977333, :type :invoke, :process 1, :f :echo, :value "Please echo 36"}
-{:index 5, :time 10176135250, :type :info, :process 1, :f :echo, :value "Please echo 36", :error :net-timeout}

@@ -1,0 +1,20 @@
+2023/04/29 17:32:40 Received {c4 n4 {"type":"init","node_id":"n4","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2023/04/29 17:32:40 Node n4 initialized
+2023/04/29 17:32:40 Sent {"src":"n4","dest":"c4","body":{"in_reply_to":1,"type":"init_ok"}}
+2023/04/29 17:32:40 Received {c9 n4 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2023/04/29 17:32:40 Sent {"src":"n4","dest":"c9","body":{"in_reply_to":1,"msg_id":0,"type":"topology_ok"}}
+2023/04/29 17:32:40 Received {c14 n4 {"type":"read","msg_id":1}}
+2023/04/29 17:32:40 Sent {"src":"n4","dest":"c14","body":{"in_reply_to":1,"messages":[],"type":"read_ok"}}
+2023/04/29 17:32:41 Received {c14 n4 {"type":"broadcast","message":0,"msg_id":2}}
+2023/04/29 17:32:41 Sent {"src":"n4","dest":"n1","body":{"messages":[0],"type":"node_broadcast"}}
+2023/04/29 17:32:41 Sent {"src":"n4","dest":"n3","body":{"messages":[0],"type":"node_broadcast"}}
+2023/04/29 17:32:41 Sent {"src":"n4","dest":"c14","body":{"in_reply_to":2,"type":"broadcast_ok"}}
+2023/04/29 17:32:41 Received {n1 n4 {"messages":[0,1,2],"type":"node_broadcast"}}
+2023/04/29 17:32:41 Received {n3 n4 {"messages":[0,1,4],"type":"node_broadcast"}}
+2023/04/29 17:32:41 Received {c14 n4 {"type":"read","msg_id":3}}
+2023/04/29 17:32:41 Sent {"src":"n4","dest":"c14","body":{"in_reply_to":3,"messages":[0,0,1,2,0,1,4],"type":"read_ok"}}
+2023/04/29 17:32:42 Received {n1 n4 {"messages":[0,1,2,0,1,2,3,1,0,1,2,0,1,4,5,1,0,1,2,0,1,4,5,6,7],"type":"node_broadcast"}}
+2023/04/29 17:32:42 Received {c14 n4 {"type":"broadcast","message":9,"msg_id":4}}
+2023/04/29 17:32:42 Sent {"src":"n4","dest":"n1","body":{"messages":[0,0,1,2,0,1,4,0,1,2,0,1,2,3,1,0,1,2,0,1,4,5,1,0,1,2,0,1,4,5,6,7,9],"type":"node_broadcast"}}
+2023/04/29 17:32:42 Sent {"src":"n4","dest":"n3","body":{"messages":[0,0,1,2,0,1,4,0,1,2,0,1,2,3,1,0,1,2,0,1,4,5,1,0,1,2,0,1,4,5,6,7,9],"type":"node_broadcast"}}
+2023/04/29 17:32:42 Sent {"src":"n4","dest":"c14","body":{"in_reply_to":4,"type":"broadcast_ok"}}

@@ -1,0 +1,85 @@
+2023/04/26 15:34:12 Received {c3 n1 {"type":"init","node_id":"n1","node_ids":["n0","n1","n2","n3","n4"],"msg_id":1}}
+2023/04/26 15:34:12 Node n1 initialized
+2023/04/26 15:34:12 Sent {"src":"n1","dest":"c3","body":{"in_reply_to":1,"type":"init_ok"}}
+2023/04/26 15:34:12 Received {c7 n1 {"type":"topology","topology":{"n0":["n3","n1"],"n1":["n4","n2","n0"],"n2":["n1"],"n3":["n0","n4"],"n4":["n1","n3"]},"msg_id":1}}
+2023/04/26 15:34:12 Sent {"src":"n1","dest":"c7","body":{"in_reply_to":1,"msg_id":0,"type":"topology_ok"}}
+2023/04/26 15:34:12 Received {c11 n1 {"type":"read","msg_id":1}}
+2023/04/26 15:34:12 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":1,"messages":[],"type":"read_ok"}}
+2023/04/26 15:34:13 Received {c11 n1 {"type":"broadcast","message":3,"msg_id":2}}
+2023/04/26 15:34:13 Body = map[message:3 msg_id:2 type:broadcast]
+2023/04/26 15:34:13 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":2,"type":"broadcast_ok"}}
+2023/04/26 15:34:13 Received {c11 n1 {"type":"broadcast","message":7,"msg_id":3}}
+2023/04/26 15:34:13 Body = map[message:7 msg_id:3 type:broadcast]
+2023/04/26 15:34:13 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":3,"type":"broadcast_ok"}}
+2023/04/26 15:34:14 Received {c11 n1 {"type":"broadcast","message":9,"msg_id":4}}
+2023/04/26 15:34:14 Body = map[message:9 msg_id:4 type:broadcast]
+2023/04/26 15:34:14 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":4,"type":"broadcast_ok"}}
+2023/04/26 15:34:15 Received {c11 n1 {"type":"read","msg_id":5}}
+2023/04/26 15:34:15 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":5,"messages":[3,7,9],"type":"read_ok"}}
+2023/04/26 15:34:15 Received {c11 n1 {"type":"read","msg_id":6}}
+2023/04/26 15:34:15 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":6,"messages":[3,7,9],"type":"read_ok"}}
+2023/04/26 15:34:16 Received {c11 n1 {"type":"broadcast","message":19,"msg_id":7}}
+2023/04/26 15:34:16 Body = map[message:19 msg_id:7 type:broadcast]
+2023/04/26 15:34:16 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":7,"type":"broadcast_ok"}}
+2023/04/26 15:34:17 Received {c11 n1 {"type":"broadcast","message":21,"msg_id":8}}
+2023/04/26 15:34:17 Body = map[message:21 msg_id:8 type:broadcast]
+2023/04/26 15:34:17 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":8,"type":"broadcast_ok"}}
+2023/04/26 15:34:17 Received {c11 n1 {"type":"broadcast","message":23,"msg_id":9}}
+2023/04/26 15:34:17 Body = map[message:23 msg_id:9 type:broadcast]
+2023/04/26 15:34:17 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":9,"type":"broadcast_ok"}}
+2023/04/26 15:34:18 Received {c11 n1 {"type":"read","msg_id":10}}
+2023/04/26 15:34:18 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":10,"messages":[3,7,9,19,21,23],"type":"read_ok"}}
+2023/04/26 15:34:19 Received {c11 n1 {"type":"broadcast","message":26,"msg_id":11}}
+2023/04/26 15:34:19 Body = map[message:26 msg_id:11 type:broadcast]
+2023/04/26 15:34:19 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":11,"type":"broadcast_ok"}}
+2023/04/26 15:34:19 Received {c11 n1 {"type":"read","msg_id":12}}
+2023/04/26 15:34:19 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":12,"messages":[3,7,9,19,21,23,26],"type":"read_ok"}}
+2023/04/26 15:34:20 Received {c11 n1 {"type":"broadcast","message":36,"msg_id":13}}
+2023/04/26 15:34:20 Body = map[message:36 msg_id:13 type:broadcast]
+2023/04/26 15:34:20 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":13,"type":"broadcast_ok"}}
+2023/04/26 15:34:21 Received {c11 n1 {"type":"broadcast","message":37,"msg_id":14}}
+2023/04/26 15:34:21 Body = map[message:37 msg_id:14 type:broadcast]
+2023/04/26 15:34:21 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":14,"type":"broadcast_ok"}}
+2023/04/26 15:34:21 Received {c11 n1 {"type":"read","msg_id":15}}
+2023/04/26 15:34:21 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":15,"messages":[3,7,9,19,21,23,26,36,37],"type":"read_ok"}}
+2023/04/26 15:34:22 Received {c11 n1 {"type":"read","msg_id":16}}
+2023/04/26 15:34:22 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":16,"messages":[3,7,9,19,21,23,26,36,37],"type":"read_ok"}}
+2023/04/26 15:34:22 Received {c11 n1 {"type":"broadcast","message":47,"msg_id":17}}
+2023/04/26 15:34:22 Body = map[message:47 msg_id:17 type:broadcast]
+2023/04/26 15:34:22 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":17,"type":"broadcast_ok"}}
+2023/04/26 15:34:23 Received {c11 n1 {"type":"read","msg_id":18}}
+2023/04/26 15:34:23 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":18,"messages":[3,7,9,19,21,23,26,36,37,47],"type":"read_ok"}}
+2023/04/26 15:34:24 Received {c11 n1 {"type":"broadcast","message":52,"msg_id":19}}
+2023/04/26 15:34:24 Body = map[message:52 msg_id:19 type:broadcast]
+2023/04/26 15:34:24 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":19,"type":"broadcast_ok"}}
+2023/04/26 15:34:25 Received {c11 n1 {"type":"read","msg_id":20}}
+2023/04/26 15:34:25 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":20,"messages":[3,7,9,19,21,23,26,36,37,47,52],"type":"read_ok"}}
+2023/04/26 15:34:25 Received {c11 n1 {"type":"broadcast","message":58,"msg_id":21}}
+2023/04/26 15:34:25 Body = map[message:58 msg_id:21 type:broadcast]
+2023/04/26 15:34:25 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":21,"type":"broadcast_ok"}}
+2023/04/26 15:34:26 Received {c11 n1 {"type":"broadcast","message":62,"msg_id":22}}
+2023/04/26 15:34:26 Body = map[message:62 msg_id:22 type:broadcast]
+2023/04/26 15:34:26 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":22,"type":"broadcast_ok"}}
+2023/04/26 15:34:27 Received {c11 n1 {"type":"broadcast","message":67,"msg_id":23}}
+2023/04/26 15:34:27 Body = map[message:67 msg_id:23 type:broadcast]
+2023/04/26 15:34:27 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":23,"type":"broadcast_ok"}}
+2023/04/26 15:34:27 Received {c11 n1 {"type":"read","msg_id":24}}
+2023/04/26 15:34:27 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":24,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67],"type":"read_ok"}}
+2023/04/26 15:34:28 Received {c11 n1 {"type":"broadcast","message":73,"msg_id":25}}
+2023/04/26 15:34:28 Body = map[message:73 msg_id:25 type:broadcast]
+2023/04/26 15:34:28 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":25,"type":"broadcast_ok"}}
+2023/04/26 15:34:28 Received {c11 n1 {"type":"read","msg_id":26}}
+2023/04/26 15:34:28 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":26,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73],"type":"read_ok"}}
+2023/04/26 15:34:29 Received {c11 n1 {"type":"read","msg_id":27}}
+2023/04/26 15:34:29 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":27,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73],"type":"read_ok"}}
+2023/04/26 15:34:30 Received {c11 n1 {"type":"read","msg_id":28}}
+2023/04/26 15:34:30 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":28,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73],"type":"read_ok"}}
+2023/04/26 15:34:31 Received {c11 n1 {"type":"read","msg_id":29}}
+2023/04/26 15:34:31 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":29,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73],"type":"read_ok"}}
+2023/04/26 15:34:31 Received {c11 n1 {"type":"read","msg_id":30}}
+2023/04/26 15:34:31 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":30,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73],"type":"read_ok"}}
+2023/04/26 15:34:31 Received {c11 n1 {"type":"broadcast","message":86,"msg_id":31}}
+2023/04/26 15:34:31 Body = map[message:86 msg_id:31 type:broadcast]
+2023/04/26 15:34:31 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":31,"type":"broadcast_ok"}}
+2023/04/26 15:34:42 Received {c11 n1 {"type":"read","msg_id":32}}
+2023/04/26 15:34:42 Sent {"src":"n1","dest":"c11","body":{"in_reply_to":32,"messages":[3,7,9,19,21,23,26,36,37,47,52,58,62,67,73,86],"type":"read_ok"}}
