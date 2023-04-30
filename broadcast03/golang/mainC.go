@@ -111,48 +111,21 @@ func main() {
 		}
 		globalMessages = append(globalMessages, message)
 
-		// v1. Send the message to all other nodes I have but who sent to me doesn't
-		/*
-			nodesReceived := body["neighbors"].([]interface{})
-			myNeighbors := topology[n.ID()]
-			for _, k := range myNeighbors.([]interface{}) {
-				for _, v := range nodesReceived {
-					if k.(string) == v.(string) {
-						break
-					}
-				}
-				gossipBody := map[string]any{
-					"type":      "node_broadcast",
-					"neighbors": myNeighbors,
-					"message":   message,
-				}
-				err := n.Send(k.(string), gossipBody)
-				if err != nil {
-					panic("Complicado issae")
-				}
-			}
-		*/
-		// v2. Propagate the message with all nodes I have that are not in the list I received
-		// plus the ones I received
+		// Send the message to all other nodes I have but who sent to me doesn't
 		nodesReceived := body["neighbors"].([]interface{})
 		myNeighbors := topology[n.ID()]
-		var onlyMine []interface{}
 		for _, k := range myNeighbors.([]interface{}) {
 			for _, v := range nodesReceived {
 				if k.(string) == v.(string) {
 					break
 				}
 			}
-			onlyMine = append(onlyMine, k.(string))
-		}
-		allNodes := append(nodesReceived, onlyMine...)
-		for _, v := range onlyMine {
 			gossipBody := map[string]any{
 				"type":      "node_broadcast",
-				"neighbors": allNodes,
+				"neighbors": myNeighbors,
 				"message":   message,
 			}
-			err := n.Send(v.(string), gossipBody)
+			err := n.Send(k.(string), gossipBody)
 			if err != nil {
 				panic("Complicado issae")
 			}
