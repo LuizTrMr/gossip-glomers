@@ -15,6 +15,8 @@ var globalMessageID int = 0
 // var topology map[string][]string
 var topology map[string]interface{}
 
+var sent map[string][]float64
+
 func main() {
 	n := maelstrom.NewNode()
 
@@ -35,6 +37,11 @@ func main() {
 		if topology != nil {
 			myNeighbors := topology[n.ID()]
 			for _, v := range myNeighbors.([]interface{}) {
+				if _, ok := sent[v.(string)]; ok {
+					sent[v.(string)] = append(sent[v.(string)], body["message"].(float64))
+				} else {
+					sent[v.(string)] = []float64{body["message"].(float64)}
+				}
 				respBody := map[string]any{
 					"type":      "node_broadcast",
 					"neighbors": myNeighbors,
@@ -111,21 +118,30 @@ func main() {
 		}
 		globalMessages = append(globalMessages, message)
 
-		// Send the message to all other nodes I have but who sent to me doesn't
 		nodesReceived := body["neighbors"].([]interface{})
 		myNeighbors := topology[n.ID()]
+		var onlyMine []interface{}
 		for _, k := range myNeighbors.([]interface{}) {
 			for _, v := range nodesReceived {
 				if k.(string) == v.(string) {
 					break
 				}
 			}
+			onlyMine = append(onlyMine, k.(string))
+		}
+		allNodes := append(nodesReceived, onlyMine...)
+		for _, v := range onlyMine {
 			gossipBody := map[string]any{
 				"type":      "node_broadcast",
-				"neighbors": myNeighbors,
+				"neighbors": allNodes,
 				"message":   message,
 			}
-			err := n.Send(k.(string), gossipBody)
+			if _, ok := sent[v.(string)]; ok {
+				sent[v.(string)] = append(sent[v.(string)], message)
+			} else {
+				sent[v.(string)] = []float64{message}
+			}
+			err := n.Send(v.(string), gossipBody)
 			if err != nil {
 				panic("Complicado issae")
 			}

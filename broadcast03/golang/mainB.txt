@@ -111,16 +111,11 @@ func main() {
 		}
 		globalMessages = append(globalMessages, message)
 
-		// v1. Send the message to all other nodes I have but who sent to me doesn't
-		/*
-			nodesReceived := body["neighbors"].([]interface{})
-			myNeighbors := topology[n.ID()]
-			for _, k := range myNeighbors.([]interface{}) {
-				for _, v := range nodesReceived {
-					if k.(string) == v.(string) {
-						break
-					}
-				}
+		/* v1. Send the message to all other nodes I have but who sent to me doesn't
+		nodesReceived := body["neighbors"].([]interface{})
+		myNeighbors := topology[n.ID()]
+		for _, k := range myNeighbors.([]interface{}) {
+			if !contains(nodesReceived, k.(string)) {
 				gossipBody := map[string]any{
 					"type":      "node_broadcast",
 					"neighbors": myNeighbors,
@@ -131,19 +126,18 @@ func main() {
 					panic("Complicado issae")
 				}
 			}
+		}
 		*/
+
 		// v2. Propagate the message with all nodes I have that are not in the list I received
 		// plus the ones I received
 		nodesReceived := body["neighbors"].([]interface{})
 		myNeighbors := topology[n.ID()]
 		var onlyMine []interface{}
 		for _, k := range myNeighbors.([]interface{}) {
-			for _, v := range nodesReceived {
-				if k.(string) == v.(string) {
-					break
-				}
+			if !contains(nodesReceived, k.(string)) {
+				onlyMine = append(onlyMine, k.(string))
 			}
-			onlyMine = append(onlyMine, k.(string))
 		}
 		allNodes := append(nodesReceived, onlyMine...)
 		for _, v := range onlyMine {
@@ -166,4 +160,13 @@ func main() {
 		log.Printf("ERROR: %s", err)
 		os.Exit(1)
 	}
+}
+
+func contains(list []interface{}, b string) bool {
+	for _, v := range list {
+		if v.(string) == b {
+			return true
+		}
+	}
+	return false
 }

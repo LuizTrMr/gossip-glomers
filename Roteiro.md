@@ -22,7 +22,13 @@
 > Guardar valores recebidos em um array e enviá-los quando um request do tipo `read` for feito para o nó.
 
 - b) Multi Node
-> Agora as mensagens são enviadas para um nó, mas todos precisam ser atualizados com a nova mensagem, como em um processo de sincronização entre os nós. Primeiro a ideia foi só assim que receber a mensagem de `broadcast`, enviar a mesma mensagem pra todos os nós vizinhos segundo a topologia. Isso não deu certo porque alguns nós não vão receber essa atualização, por causa disso foi criado uma nova mensagem(`node_broadcast`), que seria transmitida entre os nós.
-Primeiro checa-se se o nó que a recebe já possiu aquela mensagem, caso sim, não fazer nada, caso não ela é salva pelo nó e aí nós mandamos ela também pra todos os outros nós vizinhos. Mas só isso não é o suficiente, porque nós precisamos repassar a mensagem para TODOS os nós. Por isso uma modificação foi feita, além de mandar a mensagem recebida, a própria lista de nós vizinhos também passa a ser mandada, dessa forma, o nó que recebe a mensagem de `node_broadcast` pode agora saber para quais nós a mensagem já foi mandada, assim ele checa a sua própria lista de vizinhos e manda para os seus vizinhos que ainda não receberam a mensagem. Por último, foi feita uma última alteração, ao invés do nó mandar sua própria lista de vizinhos, ele manda a lista de vizinhos que ele recebeu MAIS os seus vizinhos que não estão incluídos nesta lista, dessa forma não existem "requisições" redundantes.
+### Agora as mensagens são enviadas para um nó, mas todos precisam ser atualizados com a nova mensagem, como em um processo de sincronização entre os nós.
+> Primeiro a ideia foi só assim que receber a mensagem de `broadcast`, enviar a mesma mensagem pelo `node_boradcast` pra todos os nós vizinhos segundo a topologia. Mas é preciso atingir TODOS os nós.
+
+> Primeiro, ao receber a mensagem `broadcast`, ela é armazenada e daí, uma mensagem `node_broadcast` é enviada a todos os seus vizinhos. Mas só isso não seria o suficiente, porque nós precisamos repassar a mensagem para TODOS os nós.
+Então, além de se armazenar a mensagem ao recebê-la de um `node_broadcast`, nós também a mandamos para todos os vizinhos daquele nó.
+Por isso uma modificação foi feita, além de mandar a mensagem recebida, a própria lista de nós vizinhos passa a ser mandada
+Mas isso pode ser um pouco redundante, várias mensagens "atoa" seriam trocadas. Dessa forma uma modificação foi feita: além de mandar a mensagem recebida, a própria lista de nós vizinhos também passa a ser mandada, dessa forma, o nó que recebe a mensagem de `node_broadcast` pode agora saber para quais nós a mensagem já foi mandada, assim ele checa a sua própria lista de vizinhos e manda `apenas` para os seus vizinhos que ainda não receberam a mensagem.
+Por último, foi feita mais uma alteração, ao invés do nó mandar sua própria lista de vizinhos, ele manda a lista de vizinhos que ele recebeu MAIS os seus vizinhos que não estão incluídos nesta lista, dessa forma existirão menos requisições redundantes.
 
 - c) Fault Tolerant
