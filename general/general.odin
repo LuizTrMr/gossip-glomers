@@ -7,8 +7,9 @@ import "core:encoding/json"
 LINE_SIZE :: 1024
 global_msg_id: int = 0
 
-run :: proc(process_request: proc(json_string: string) -> (string, bool)) {
-	write("LOG START\n")
+run :: proc(
+	process_request: proc(json_string: string) -> (string, bool)
+) {
 	for true {
 		buf: [LINE_SIZE]byte
 		json_string, ok := read_line(buf[:])
@@ -36,13 +37,9 @@ Init_Response :: struct {
 }
 
 Message :: struct($Body: typeid) {
-	src : string, // A string identifying the node this message came from
-	dest: string, // A string identifying the node this message is to
-	body: Body,   // An object: the payload of the message
-}
-
-write :: proc(s: string) {
-	os.write(os.stderr, transmute([]byte)s)
+	src : string, // Source      node of the message
+	dest: string, // Destination node of the message
+	body: Body,   // The payload of the message
 }
 
 read_line :: proc(buf: []byte) -> (string, bool) {

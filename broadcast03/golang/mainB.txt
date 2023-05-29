@@ -12,7 +12,6 @@ import (
 var globalMessages []float64 = []float64{}
 var globalMessageID int = 0
 
-// var topology map[string][]string
 var topology map[string]interface{}
 
 func main() {

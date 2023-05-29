@@ -12,10 +12,9 @@ import (
 var globalMessages []float64 = []float64{}
 var globalMessageID int = 0
 
-// var topology map[string][]string
 var topology map[string]interface{}
 
-var sent map[string][]float64
+var sent map[string][]float64 = make(map[string][]float64)
 
 func main() {
 	n := maelstrom.NewNode()
@@ -37,11 +36,6 @@ func main() {
 		if topology != nil {
 			myNeighbors := topology[n.ID()]
 			for _, v := range myNeighbors.([]interface{}) {
-				if _, ok := sent[v.(string)]; ok {
-					sent[v.(string)] = append(sent[v.(string)], body["message"].(float64))
-				} else {
-					sent[v.(string)] = []float64{body["message"].(float64)}
-				}
 				respBody := map[string]any{
 					"type":      "node_broadcast",
 					"neighbors": myNeighbors,
@@ -72,6 +66,9 @@ func main() {
 		topology, ok = body["topology"].(map[string]interface{})
 		if !ok {
 			fmt.Printf("Body topology = %v; global topology = %v\n", body["topology"], topology)
+		}
+		for k := range topology {
+			sent[k] = []float64{}
 		}
 		resp := map[string]any{
 			"type":        "topology_ok",
@@ -118,34 +115,53 @@ func main() {
 		}
 		globalMessages = append(globalMessages, message)
 
+		// Send to nodes that haven't been sent yet
 		nodesReceived := body["neighbors"].([]interface{})
 		myNeighbors := topology[n.ID()]
 		var onlyMine []interface{}
 		for _, k := range myNeighbors.([]interface{}) {
-			for _, v := range nodesReceived {
-				if k.(string) == v.(string) {
-					break
-				}
+			if !contains(nodesReceived, k.(string)) {
+				onlyMine = append(onlyMine, k.(string))
 			}
-			onlyMine = append(onlyMine, k.(string))
 		}
 		allNodes := append(nodesReceived, onlyMine...)
 		for _, v := range onlyMine {
+			sent[v.(string)] = append(sent[v.(string)], message)
 			gossipBody := map[string]any{
 				"type":      "node_broadcast",
 				"neighbors": allNodes,
 				"message":   message,
-			}
-			if _, ok := sent[v.(string)]; ok {
-				sent[v.(string)] = append(sent[v.(string)], message)
-			} else {
-				sent[v.(string)] = []float64{message}
 			}
 			err := n.Send(v.(string), gossipBody)
 			if err != nil {
 				panic("Complicado issae")
 			}
 		}
+
+		/* time.Sleep(time.Second)
+		for _, v := range sent {
+			if len(v) != 0 {
+				// Resend the messages
+			}
+		}
+		*/
+
+		// After 1 second, retry to send the message
+		/*
+			time.Sleep(time.Second)
+			// Send to nodes that haven't been sent yet
+			for _, v := range onlyMine {
+				gossipBody := map[string]any{
+					"type":      "node_broadcast",
+					"neighbors": allNodes,
+					"message":   message,
+				}
+				err := n.Send(v.(string), gossipBody)
+				if err != nil {
+					panic("Complicado issae")
+				}
+			}
+		*/
 
 		return nil
 	})
@@ -155,4 +171,13 @@ func main() {
 		log.Printf("ERROR: %s", err)
 		os.Exit(1)
 	}
+}
+
+func contains(list []interface{}, b string) bool {
+	for _, v := range list {
+		if v.(string) == b {
+			return true
+		}
+	}
+	return false
 }

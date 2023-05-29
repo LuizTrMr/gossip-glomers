@@ -46,9 +46,9 @@ process_request :: proc(json_string: string) -> (string, bool) { using general
 
 				body = {
 					type = "generate_ok",
-					id = generated_uuid(), 1.
-					// id = generate_id(), 2.
-					// id = generate_id_source_based(&sb, msg.dest, msg.body.msg_id), 3.
+					id = generated_uuid(), // 1.
+					// id = generate_id(), // 2.
+					// id = generate_id_source_based(&sb, msg.dest, msg.body.msg_id), // 3.
 					in_reply_to = msg.body.msg_id,
 					msg_id = global_msg_id,
 				},
